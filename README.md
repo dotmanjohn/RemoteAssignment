@@ -156,6 +156,7 @@ N:B: It is assumed that “FirstPurchaseDate” is also “Registration or Sign 
 
 •	Missing relationship between DimCustomer and DimSalesTerritory, GeographyKey and AddressLine columns on DimCustomer are insufficient in establishing customer country, this prevents analyzing customers by country.
 
+****************************************************************************
 
 **EDA Scripts and Findings**
 
