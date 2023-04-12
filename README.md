@@ -131,7 +131,9 @@ CREATE TABLE IF NOT EXISTS public."FactResellerSales"
 )
 
 <img width="216" alt="01  Tables" src="https://user-images.githubusercontent.com/63157768/231432638-eccd8a1a-6ccd-4f88-bf5d-ed617dc02f70.png">
+
 ****************************************************************************
+
 **Exploratoty Data Analysis**
 
 **Brief Notes**
@@ -156,6 +158,7 @@ N:B: It is assumed that “FirstPurchaseDate” is also “Registration or Sign 
 
 
 **EDA Scripts and Findings**
+
 ********************************************************************
 •	House Ownership Distribution
 
