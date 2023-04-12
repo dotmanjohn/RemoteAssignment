@@ -16,7 +16,7 @@ There are 4 sheets on the spreadsheet provided for this assignment i.e., 4 table
 ****************************************************************************
 **Table Creation Scripts**
 1.	DimCustomer
-
+```
 CREATE TABLE public."DimCustomer"
 
 (
@@ -51,9 +51,9 @@ CREATE TABLE public."DimCustomer"
     "CommuteDistance" varchar,
     CONSTRAINT "DimCustomer_pkey" PRIMARY KEY ("Customerkey")_
 )
-
+```
 2.	DimProduct
-
+```
 CREATE TABLE public."DimProduct"
 
 (
@@ -83,10 +83,10 @@ CREATE TABLE public."DimProduct"
     "Status" varchar,
     CONSTRAINT "DimProduct_pkey" PRIMARY KEY ("ProductKey")_
 )
-
+```
 
 3.	DimSalesTerritory
-
+```
 CREATE TABLE public."DimSalesTerritory"
 (
    _"SalesTerritoryKey" bigint NOT NULL,
@@ -96,9 +96,9 @@ CREATE TABLE public."DimSalesTerritory"
     "SalesTerritoryGroup" varchar,
     CONSTRAINT "DimSalesTerritory_pkey" PRIMARY KEY ("SalesTerritoryKey")_
 )
-
+```
 4.	FactResellerSales
-
+```
 CREATE TABLE IF NOT EXISTS public."FactResellerSales"
 (
    _"ProductKey" bigint NOT NULL,
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS public."FactResellerSales"
     "DueDate" timestamp,
     "ShipDate" timestamp_
 )
-
+```
 <img width="216" alt="01  Tables" src="https://user-images.githubusercontent.com/63157768/231432638-eccd8a1a-6ccd-4f88-bf5d-ed617dc02f70.png">
 
 ****************************************************************************
