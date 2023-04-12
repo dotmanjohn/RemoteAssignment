@@ -99,7 +99,7 @@ CREATE TABLE public."DimSalesTerritory"
 ```
 CREATE TABLE IF NOT EXISTS public."FactResellerSales"
 (
-   _"ProductKey" bigint NOT NULL,
+   "ProductKey" bigint NOT NULL,
     "OrderDateKey" bigint,
     "DueDateKey" bigint,
     "ShipDateKey" bigint,
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS public."FactResellerSales"
     "CustomerPONumber" varchar,
     "OrderDate" timestamp,
     "DueDate" timestamp,
-    "ShipDate" timestamp_
+    "ShipDate" timestamp
 )
 ```
 <img width="216" alt="01  Tables" src="https://user-images.githubusercontent.com/63157768/231432638-eccd8a1a-6ccd-4f88-bf5d-ed617dc02f70.png">
