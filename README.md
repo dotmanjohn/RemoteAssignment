@@ -129,7 +129,8 @@ CREATE TABLE IF NOT EXISTS public."FactResellerSales"
 )
 
 <img width="216" alt="01  Tables" src="https://user-images.githubusercontent.com/63157768/231432638-eccd8a1a-6ccd-4f88-bf5d-ed617dc02f70.png">
-_Created Tables_
+Created Tables
+
 
 **Exploratoty Data Analysis**
 
