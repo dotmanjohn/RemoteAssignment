@@ -1,5 +1,5 @@
 Remote Assignment
-**************************************
+****************************************************************************
 **Database Connection**
 
 A Postgres database was created on local and connection was made to the database via a pgadmin client.
@@ -9,11 +9,11 @@ Host: 172.17.0.2
 Username: postgres
 
 Password: postgresEnter
-
+****************************************************************************
 **Scope**
 
 There are 4 sheets on the spreadsheet provided for this assignment i.e., 4 tables to be created within the database, DimCustomer, DimProduct, DimSalesTerritory and FactResellerSales
- 
+****************************************************************************
 **Table Creation Scripts**
 1.	DimCustomer
 
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS public."FactResellerSales"
 )
 
 <img width="216" alt="01  Tables" src="https://user-images.githubusercontent.com/63157768/231432638-eccd8a1a-6ccd-4f88-bf5d-ed617dc02f70.png">
-
+****************************************************************************
 **Exploratoty Data Analysis**
 
 **Brief Notes**
