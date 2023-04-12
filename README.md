@@ -129,8 +129,6 @@ CREATE TABLE IF NOT EXISTS public."FactResellerSales"
 )
 
 <img width="216" alt="01  Tables" src="https://user-images.githubusercontent.com/63157768/231432638-eccd8a1a-6ccd-4f88-bf5d-ed617dc02f70.png">
-Created Tables
-
 
 **Exploratoty Data Analysis**
 
@@ -170,18 +168,18 @@ Finding: Majority of the customers own a house, 12,502 against 5,982.
 
 •	House Ownership Distribution by Yearly Income
 
-_with base as
+with base as
 (SELECT "YearlyIncome" , "HouseOwnerFlag" , count(1) owner_count 
 FROM "DimCustomer"
 group by "YearlyIncome" , "HouseOwnerFlag"),
  
-_tot as (select "YearlyIncome", count(1) total_count
-from "DimCustomer" group by 1)_
+tot as (select "YearlyIncome", count(1) total_count
+from "DimCustomer" group by 1)
 
 select b.* , round((owner_count::numeric/total_count::numeric)*100,2) pct
 from base b 
 left join tot t on t."YearlyIncome" = b."YearlyIncome"
-order by 1,3 desc ;_
+order by 1,3 desc ;
 
 <img width="335" alt="03  House owner by income" src="https://user-images.githubusercontent.com/63157768/231433136-7191df58-6268-424e-a626-0155119a714f.png">
 
@@ -223,19 +221,19 @@ Finding: The customer set is dominated by Professionals followed by Skilled Manu
 
 •	Level of education and occupation distribution
 
-_with base as (SELECT "EnglishEducation" , "EnglishOccupation" , count(1) cust_count
+with base as (SELECT "EnglishEducation" , "EnglishOccupation" , count(1) cust_count
 FROM "DimCustomer"
 group by 1, 2),
 
-_tot as (SELECT "EnglishEducation" , count(1) total_count
+tot as (SELECT "EnglishEducation" , count(1) total_count
 FROM "DimCustomer"
-group by 1)_
+group by 1)
 
 select b."EnglishEducation", b."EnglishOccupation", b.cust_count, 
 round((cust_count::numeric/total_count::numeric)*100,2) pct
 from base b 
  left join tot on tot."EnglishEducation" = b."EnglishEducation"
- order by 1, 3 desc;_
+ order by 1, 3 desc;
 
 <img width="332" alt="06  Education and Occupation distribution" src="https://user-images.githubusercontent.com/63157768/231433394-9e4b35b4-ca60-4783-8cc3-aea27749b4c5.png">
 
@@ -441,7 +439,7 @@ The result is the monthly total sales amount of all the products sold in 2012.
 
 **Script:**
 
-_with base as 
+with base as 
 (select "Customerkey", "MaritalStatus", "Gender",
 to_date(
 	concat(split_part("BirthDate", '/', 3),
@@ -474,15 +472,18 @@ case when age_group = 'AgeBetween35and50' then count(1) else 0 end AgeBetween35a
 case when age_group = 'AgeAbove50' then count(1) else 0 end AgeAbove50
  from age_grp
  group by "MaritalStatus", "Gender",age_group
- order by "MaritalStatus", "Gender"_
+ order by "MaritalStatus", "Gender"
 
 <img width="438" alt="Question 3" src="https://user-images.githubusercontent.com/63157768/231435005-69ae679e-aac6-493f-9426-90636c354cda.png">
 
 **Explanation:**
 
 To solve for this question, CTEs were used, the first CTE (base) returns all the relevant columns. There is a need to group customers by age and to get customer age which is not readily available, the age has to be calculated using the birthdate column, however the birthdate column is not in the right date format hence there is a need to transform the column into the right format, this is done using the split_part function and then concatenating the date parts (year, month and date) to get the right format.
+
 The transformed and newly created birthday column is then used to calculate customers age in the second CTE (age), for this, the age() function is used to get the interval between current date (‘2070-01-01’) and birthday.
+
 The third CTE (age_grp) then groups customers into the 3 age buckets required by extracting customers age using the extract() function on the age interval gotten in age CTE. This is completed with a case statement.
+
 Finally the age_grp CTE is leveraged to query the desired result returning the MaritalStatus and Gender of customers alongside the 3 age groups and the number of customers in each bucket.
 ********************************************************************
 
@@ -494,7 +495,7 @@ Finally the age_grp CTE is leveraged to query the desired result returning the M
 
 **Script:**
 
-_with base as (
+with base as (
 	select dp."ProductName", 
 	to_char("OrderDate",'MM-YYYY') Month_Year,
 	"SalesTerritoryCountry", sum("SalesAmount") amount
@@ -512,14 +513,17 @@ sales_rank as (
 
 select Month_Year, "SalesTerritoryCountry", "ProductName", amount SalesAmount
 from sales_rank
-where rn = 1 _
+where rn = 1 
 
 
 <img width="396" alt="Question 4" src="https://user-images.githubusercontent.com/63157768/231441229-5e86a915-4c4c-4a2d-b236-3a0ca21ca7e5.png">
 
 **Explanation:**
 
-Similar to question 3, CTEs are also used in solving for this question. The base CTE returns the relevant columns to this question, an aggregated (sum) SalesAmount column grouped accordingly by SalesTerritoryCountry, ProductName and Month.
+Similar to question 3, CTEs are also used in solving for this question. 
+The base CTE returns the relevant columns to this question, an aggregated (sum) SalesAmount column grouped accordingly by SalesTerritoryCountry, ProductName and Month.
+
 The sales_rank CTE returns the columns from the base CTE and a rank column by the sum of SalesAmount on a monthly basis in ascending order i.e., the least salesamount for each month is ranked 1.
+
 Finally, from the sales_rank CTE, the final output is queried as required, a combination of Country and Product with the least amount of sales for each month of 2012 by specifying in the where clause “rn = 1”.
 ********************************************************************
