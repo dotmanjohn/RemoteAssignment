@@ -152,6 +152,8 @@ N:B: It is assumed that “FirstPurchaseDate” is also “Registration or Sign 
 
 •	FactResellerSales contains a “CurrencyKey” column signifying sales were made in different currencies but the table does not contain an exchange rate column (or provision for an exchange rate table) for conversion of sales to a unitary currency for unified sales reporting. This means that for the questions that follow, where amount is concerned, it will be assumed that all sales are completed in the same currency.
 
+•	On FactResellerSales, order date recorded only has a day or two for each month across the years which is mostly at month end (28,29,30,31) and a few instances of orders made on the 1st of March, May, July and August of 2011. This suggests orders are only made on these 5 dates or the data is incomplete.
+
 •	There is no relationship between DimCustomer and FactResellerSales therefore there is no way to analyze sales by customers such as identifying the most profitable customers.
 
 •	Missing relationship between DimCustomer and DimSalesTerritory, GeographyKey and AddressLine columns on DimCustomer are insufficient in establishing customer country, this prevents analyzing customers by country.
