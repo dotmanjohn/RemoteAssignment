@@ -164,18 +164,18 @@ N:B: It is assumed that “FirstPurchaseDate” is also “Registration or Sign 
 
 ********************************************************************
 •	House Ownership Distribution
-
-_SELECT "HouseOwnerFlag" , count(1) num_owners
+```
+SELECT "HouseOwnerFlag" , count(1) num_owners
 FROM "DimCustomer"
-group by "HouseOwnerFlag";_
-
+group by "HouseOwnerFlag";
+```
 <img width="278" alt="02  House owner distribution" src="https://user-images.githubusercontent.com/63157768/231433018-629354b2-d83a-47b8-80e4-12292adc1c48.png">
 
 Finding: Majority of the customers own a house, 12,502 against 5,982.
 ********************************************************************
 
 •	House Ownership Distribution by Yearly Income
-
+```
 with base as
 (SELECT "YearlyIncome" , "HouseOwnerFlag" , count(1) owner_count 
 FROM "DimCustomer"
@@ -188,47 +188,47 @@ select b.* , round((owner_count::numeric/total_count::numeric)*100,2) pct
 from base b 
 left join tot t on t."YearlyIncome" = b."YearlyIncome"
 order by 1,3 desc ;
-
+```
 <img width="335" alt="03  House owner by income" src="https://user-images.githubusercontent.com/63157768/231433136-7191df58-6268-424e-a626-0155119a714f.png">
 
 Finding: Across all income levels except those who earn 160,000, there are more house owners, we can assume that owing a house is essential to the customers and income level does not prevent them from doing so. 
 ********************************************************************
 
 •	Commute distance distribution
-
-_SELECT "CommuteDistance" , count(1) num_owners
+```
+SELECT "CommuteDistance" , count(1) num_owners
 FROM "DimCustomer"
-group by "CommuteDistance";_
-
+group by "CommuteDistance";
+```
 <img width="200" alt="17  Commute Distance" src="https://user-images.githubusercontent.com/63157768/231437153-3fe0f3bc-e671-41a6-a25f-75b769e8c15c.png">
 
 Finding: The largest group of customers commute within 0-1 miles, followed by 2-5 miles while the least group commute 10+ miles.
 ********************************************************************
 
 •	Level of education distribution
-
-_SELECT "EnglishEducation" , count(1) cust_count
+```
+SELECT "EnglishEducation" , count(1) cust_count
 FROM "DimCustomer"
-group by 1;_
-
+group by 1;
+```
 <img width="182" alt="04  Education Distribution" src="https://user-images.githubusercontent.com/63157768/231433271-cfcd550d-f420-4be3-8c6e-bd12f85d099b.png">
 
 Finding: The customers are fairly distributed across the various education levels except those who have a partial high school education and make up the least of the distribution
 ********************************************************************
 
 •	Occupation distribution
-
-_SELECT "EnglishOccupation" , count(1) cust_count
+```
+SELECT "EnglishOccupation" , count(1) cust_count
 FROM "DimCustomer"
-group by 1;_
-
+group by 1;
+```
 <img width="186" alt="05  Occupation distribution" src="https://user-images.githubusercontent.com/63157768/231433309-639233be-6c04-4c37-8931-db25880aa22f.png">
 
 Finding: The customer set is dominated by Professionals followed by Skilled Manual, while manual workers are the least represented.
 ********************************************************************
 
 •	Level of education and occupation distribution
-
+```
 with base as (SELECT "EnglishEducation" , "EnglishOccupation" , count(1) cust_count
 FROM "DimCustomer"
 group by 1, 2),
@@ -242,19 +242,20 @@ round((cust_count::numeric/total_count::numeric)*100,2) pct
 from base b 
  left join tot on tot."EnglishEducation" = b."EnglishEducation"
  order by 1, 3 desc;
-
+```
 <img width="332" alt="06  Education and Occupation distribution" src="https://user-images.githubusercontent.com/63157768/231433394-9e4b35b4-ca60-4783-8cc3-aea27749b4c5.png">
 
 Finding: The 5 occupation types are represented across all education levels but at varying proportion as it should be expected, with the more educated levels (Bachelors and Graduate Degree) having a larger proportion of Professionals and Management while those with lower education profile barely have representation in these senior roles. Those who only have partial high school education are mostly clerical or manual workers.
 ********************************************************************
 
 •	YearlyIncome distribution by EnglishOccupation
-
-_SELECT "EnglishOccupation", avg("YearlyIncome") avg_income , max("YearlyIncome") max_income, 
+```
+SELECT "EnglishOccupation", avg("YearlyIncome") avg_income , max("YearlyIncome") max_income, 
 min("YearlyIncome") min_income, count(1) cust_count
 FROM "DimCustomer"
 group by "EnglishOccupation"
-order by 2;_
+order by 2;
+```
 
 <img width="418" alt="07  Yearly Income by Occupation" src="https://user-images.githubusercontent.com/63157768/231433572-2510c893-a22c-4af8-9141-634e9884f07c.png">
 
@@ -262,53 +263,53 @@ Finding: We can expect that as the occupation hierarchy increases, the average i
 ********************************************************************
 
 •	YearlyIncome distribution by EnglishEducation
-
-_SELECT "EnglishEducation", avg("YearlyIncome") avg_income , max("YearlyIncome") max_income, 
+```
+SELECT "EnglishEducation", avg("YearlyIncome") avg_income , max("YearlyIncome") max_income, 
 min("YearlyIncome") min_income, count(1) cust_count
 FROM "DimCustomer"
 group by "EnglishEducation"
-order by 2;_
-
+order by 2;
+```
 <img width="424" alt="08  Yearly Income by Education" src="https://user-images.githubusercontent.com/63157768/231433629-c4ebc3a5-89d1-4404-878d-dcc75105dc78.png">
 
 Finding: Those with the least education level i.e., partial high school earn the least on average, while those with the highest levels, a bachelors or graduate degree earn the highest with a close average as these levels mostly comprises of professional and management customers.
 ********************************************************************
 
 •	YearlyIncome distribution by NumberCarsOwned
-
-_SELECT "NumberCarsOwned", avg("YearlyIncome") avg_income , max("YearlyIncome") max_income, 
+```
+SELECT "NumberCarsOwned", avg("YearlyIncome") avg_income , max("YearlyIncome") max_income, 
 min("YearlyIncome") min_income, count(1) cust_count
 FROM "DimCustomer"
 group by "NumberCarsOwned"
-order by "NumberCarsOwned";_
-
+order by "NumberCarsOwned";
+```
 <img width="433" alt="09  Yearly Income by Car Ownership" src="https://user-images.githubusercontent.com/63157768/231433673-e8706f96-7dc5-4dbe-b886-a5f1c38bb9ce.png">
 
 Finding: The more the customers earn on average, the more cars they own.
 ********************************************************************
 
 •	YearlyIncome distribution by TotalChildren
-
+```
 _SELECT "TotalChildren", avg("YearlyIncome") avg_income , max("YearlyIncome") max_income, 
 min("YearlyIncome") min_income, count(1) cust_count
 FROM "DimCustomer"
 group by "TotalChildren"
-order by "TotalChildren";_
-
+order by "TotalChildren";
+```
 <img width="418" alt="10  Yearly Income by Children" src="https://user-images.githubusercontent.com/63157768/231433700-9bef593b-ebac-4c9b-b2d2-e99a9dbef30f.png">
 
 Finding: Customers who earn higher on average have more children.
 ********************************************************************
 
 •	Top 10 ordered products by OrderQuantity
-
-_select rs."ProductKey", "ProductName", count(1) num_times_ordered, sum("OrderQuantity") order_qty
+```
+select rs."ProductKey", "ProductName", count(1) num_times_ordered, sum("OrderQuantity") order_qty
 FROM public."FactResellerSales" rs
 left join "DimProduct" dp on dp."ProductKey" = rs."ProductKey"
 group by 1,2
 order by sum("OrderQuantity") desc
-limit 10;_
-
+limit 10;
+```
 <img width="394" alt="11  Top 10 ordered Products by Quantity" src="https://user-images.githubusercontent.com/63157768/231433736-b9aeb3d9-f3b1-445d-8619-c85d02561763.png">
 
 Finding: The most ordered product by quantity is “Classic Vest, S” with productkey 471, followed by “Short-Sleeve Classic Jersey, XL” with product key 491 and so on.
@@ -317,27 +318,27 @@ Finding: The most ordered product by quantity is “Classic Vest, S” with prod
 •	Top 10 ordered products by SalesAmount and ProductKey
 
 (ASSUMING ALL ORDERS WERE MADE IN THE SAME CURRENCY)
-
-_select rs."ProductKey", "ProductName", count(1) num_times_ordered, sum("OrderQuantity") order_qty, sum("SalesAmount") salesamount
+```
+select rs."ProductKey", "ProductName", count(1) num_times_ordered, sum("OrderQuantity") order_qty, sum("SalesAmount") salesamount
 FROM public."FactResellerSales" rs
 left join "DimProduct" dp on dp."ProductKey" = rs."ProductKey"
 group by 1,2
 order by sum("SalesAmount") desc
-limit 10;_
-
+limit 10;
+```
 <img width="440" alt="12  Top 10 Ordered Product Key by SalesAmount" src="https://user-images.githubusercontent.com/63157768/231433853-5e78bbbd-423c-46ac-b1f8-d1a4a0962cee.png">
 
 Finding: Going by the above assumption, “Mountain-200 Black, 38” with productkey 359 is the most ordered product by sales amount, “Mountain-200 Black, 38” also comes next but under a different productkey (358). However, taking the product name and productalternatekey into consideration, to avoid having the same product, even though differentiated by productkey, appear multiple times, we can reference the ProductAlternateKey for a more instructive result.
 
 (By Product Name)
-
-_select dp."ProductAlternateKey", "ProductName", count(1) num_times_ordered, sum("OrderQuantity") order_qty, sum("SalesAmount") salesamount
+```
+select dp."ProductAlternateKey", "ProductName", count(1) num_times_ordered, sum("OrderQuantity") order_qty, sum("SalesAmount") salesamount
 FROM public."FactResellerSales" rs
 left join "DimProduct" dp on dp."ProductKey" = rs."ProductKey"
 group by 1,2
 order by sum("SalesAmount") desc
-limit 10;_
-
+limit 10;
+```
 <img width="481" alt="13  Top 10 Ordered Product Name by SalesAmount" src="https://user-images.githubusercontent.com/63157768/231433918-f42b8800-f007-4b2f-af3e-c9f888966c5b.png">
 
 The output shows “Mountain-200 Black, 38” as the second most ordered product followed by “Mountain-200 Black, 42”
@@ -345,24 +346,24 @@ Note: The top ordered product(s) appearing as null constitutes the 33 identified
 ********************************************************************
 
 •	Products not listed on DimProduct
-
-_select distinct rs."ProductKey"
+```
+select distinct rs."ProductKey"
 from "FactResellerSales" rs
-where rs."ProductKey" not in (select "ProductKey" from "DimProduct")_
-
+where rs."ProductKey" not in (select "ProductKey" from "DimProduct")
+```
 <img width="152" alt="16  Missing Products from DimProduct" src="https://user-images.githubusercontent.com/63157768/231433978-77bb620a-f8cc-4b34-92b7-9b13140fa6e9.png">
 
 Finding: The above script returns 33 productkeys from FactResellerSales that are not found on DimProduct, this establishes the incompleteness of DimProduct
 ********************************************************************
 
 •	CurrencyKey distribution across SalesTerritoryCountry
-
-_select distinct st."SalesTerritoryKey", "SalesTerritoryCountry", "CurrencyKey", count(1)
+```
+select distinct st."SalesTerritoryKey", "SalesTerritoryCountry", "CurrencyKey", count(1)
 FROM public."FactResellerSales" rs
 left join "DimSalesTerritory" st on st."SalesTerritoryKey" = rs."SalesTerritoryKey"
 group by 1,2,3
-order by 1;_
-
+order by 1;
+```
 <img width="360" alt="15  CurrencyKey by Country" src="https://user-images.githubusercontent.com/63157768/231434015-71e115eb-8048-4a08-a3aa-92cac7a65db0.png">
 
 Finding: Based on the output of this script, it will be safe to assume key 100 is USD as it is mostly recorded across United States territories and a few times in France, 98 as British Pounds as it only has record in the UK, 36 is Euro recorded in France and Germany and both countries spend Euro, 19 is CAD recorded only in Canada, and 6 is AUD recorded only in Australia.
@@ -371,14 +372,14 @@ Finding: Based on the output of this script, it will be safe to assume key 100 i
 •	SalesTerritoryCountry by SalesAmount
 
 (ASSUMING ALL ORDERS WERE MADE IN THE SAME CURRENCY)
-
-_select st."SalesTerritoryCountry", count(1) num_times_ordered, sum("OrderQuantity") order_qty, sum("SalesAmount") salesamount
+```
+select st."SalesTerritoryCountry", count(1) num_times_ordered, sum("OrderQuantity") order_qty, sum("SalesAmount") salesamount
 FROM public."FactResellerSales" rs
 left join "DimSalesTerritory" st on st."SalesTerritoryKey" = rs."SalesTerritoryKey"
 group by 1
 order by sum("OrderQuantity") desc
-limit 10;_
-
+limit 10;
+```
 <img width="364" alt="14  Top Ordered Products by Country" src="https://user-images.githubusercontent.com/63157768/231434064-baa2ae33-82ad-41cd-83e9-0476d6fe7def.png">
 
 Finding: The US is the most active Country in quantity and sales, followed by Canada while Australia is the least active Country.
@@ -394,8 +395,8 @@ Finding: The US is the most active Country in quantity and sales, followed by Ca
 •	Do not use max() SQL function
 
 **Script:**
-
-_select Month_Year, SalesAmount, OrderDate 
+```
+select Month_Year, SalesAmount, OrderDate 
 from
 (select to_char("OrderDate",'MM-YYYY') Month_Year,
 "SalesAmount" SalesAmount, date("OrderDate") OrderDate,
@@ -406,8 +407,8 @@ left join "DimProduct" dp on dp."ProductKey" = rs."ProductKey"
 where "ProductName" = 'Sport-100 Helmet, Red'
 and date("OrderDate") between '2012-01-01' and '2012-12-31'
 )pp
-where rn =1_
-
+where rn =1
+```
 <img width="242" alt="Question 1" src="https://user-images.githubusercontent.com/63157768/231440853-547812af-9e6d-4bb3-b54d-043308bf3c00.png">
 
 **Explanation:**
@@ -424,14 +425,14 @@ The result is the highest transaction for the desired product as specified in th
 •	Expected output columns are ProductKey, SalesAmount, OrderMonth
 
 **Script:**
-
-_select "ProductKey", 
+```
+select "ProductKey", 
  sum("SalesAmount") SalesAmount,
  to_char("OrderDate",'MM-YYYY') Month_Year
 from "FactResellerSales"
 where date("OrderDate") between '2012-01-01' and '2012-12-31'
-group by 1,3_
-
+group by 1,3
+```
 <img width="267" alt="Question 2" src="https://user-images.githubusercontent.com/63157768/231440997-1f4a7b98-edcd-4ccd-b88f-65bbe5821adb.png">
 
 **Explanation:**
@@ -449,7 +450,7 @@ The result is the monthly total sales amount of all the products sold in 2012.
 •	Bucket them by Age Groups: a) Less than 35, b) Between 35 and 50, c) Greater than 50. Segregate the Number of Customers in each age group by Marital Status and Gender.
 
 **Script:**
-
+```
 with base as 
 (select "Customerkey", "MaritalStatus", "Gender",
 to_date(
@@ -484,7 +485,7 @@ case when age_group = 'AgeAbove50' then count(1) else 0 end AgeAbove50
  from age_grp
  group by "MaritalStatus", "Gender",age_group
  order by "MaritalStatus", "Gender"
-
+```
 <img width="438" alt="Question 3" src="https://user-images.githubusercontent.com/63157768/231435005-69ae679e-aac6-493f-9426-90636c354cda.png">
 
 **Explanation:**
@@ -505,7 +506,7 @@ Finally the age_grp CTE is leveraged to query the desired result returning the M
 •	SalesTerritoryCountry & ProductName should be included
 
 **Script:**
-
+```
 with base as (
 	select dp."ProductName", 
 	to_char("OrderDate",'MM-YYYY') Month_Year,
@@ -525,7 +526,7 @@ sales_rank as (
 select Month_Year, "SalesTerritoryCountry", "ProductName", amount SalesAmount
 from sales_rank
 where rn = 1 
-
+```
 
 <img width="396" alt="Question 4" src="https://user-images.githubusercontent.com/63157768/231441229-5e86a915-4c4c-4a2d-b236-3a0ca21ca7e5.png">
 
