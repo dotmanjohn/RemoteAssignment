@@ -1,5 +1,5 @@
-RemoteAssignment
-
+Remote Assignment
+**************************************
 **Database Connection**
 
 A Postgres database was created on local and connection was made to the database via a pgadmin client.
