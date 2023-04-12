@@ -396,6 +396,7 @@ Finding: The US is the most active Country in quantity and sales, followed by Ca
 
 **Script:**
 ```
+--assuming all sales are completed in the same currency since an exchange rate was not provided
 select Month_Year, SalesAmount, OrderDate 
 from
 (select to_char("OrderDate",'MM-YYYY') Month_Year,
@@ -426,6 +427,7 @@ The result is the highest transaction for the desired product as specified in th
 
 **Script:**
 ```
+--assuming all sales are completed in the same currency since an exchange rate was not provided
 select "ProductKey", 
  sum("SalesAmount") SalesAmount,
  to_char("OrderDate",'MM-YYYY') Month_Year
@@ -507,6 +509,7 @@ Finally the age_grp CTE is leveraged to query the desired result returning the M
 
 **Script:**
 ```
+--assuming all sales are completed in the same currency since an exchange rate was not provided
 with base as (
 	select dp."ProductName", 
 	to_char("OrderDate",'MM-YYYY') Month_Year,
