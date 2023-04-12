@@ -18,9 +18,8 @@ There are 4 sheets on the spreadsheet provided for this assignment i.e., 4 table
 1.	DimCustomer
 ```
 CREATE TABLE public."DimCustomer"
-
 (
-    _"Customerkey" bigint NOT NULL,
+    "Customerkey" bigint NOT NULL,
     "GeographyKey" bigint,
     "CustomerAlternateKey" varchar,
     "Title" varchar,
@@ -49,15 +48,14 @@ CREATE TABLE public."DimCustomer"
     "Phone" varchar,
     "DateFirstPurchase" varchar,
     "CommuteDistance" varchar,
-    CONSTRAINT "DimCustomer_pkey" PRIMARY KEY ("Customerkey")_
+    CONSTRAINT "DimCustomer_pkey" PRIMARY KEY ("Customerkey")
 )
 ```
 2.	DimProduct
 ```
 CREATE TABLE public."DimProduct"
-
 (
-    _"ProductKey" bigint NOT NULL,
+    "ProductKey" bigint NOT NULL,
     "ProductAlternateKey" varchar,
     "ProductSubcategoryKey" varchar,
     "WeightUnitMeasureCode" varchar,
@@ -81,7 +79,7 @@ CREATE TABLE public."DimProduct"
     "StartDate" varchar,
     "EndDate" varchar,
     "Status" varchar,
-    CONSTRAINT "DimProduct_pkey" PRIMARY KEY ("ProductKey")_
+    CONSTRAINT "DimProduct_pkey" PRIMARY KEY ("ProductKey")
 )
 ```
 
@@ -89,12 +87,12 @@ CREATE TABLE public."DimProduct"
 ```
 CREATE TABLE public."DimSalesTerritory"
 (
-   _"SalesTerritoryKey" bigint NOT NULL,
+   "SalesTerritoryKey" bigint NOT NULL,
     "SalesTerritoryAlternateKey" bigint,
     "SalesTerritoryRegion" varchar,
     "SalesTerritoryCountry" varchar,
     "SalesTerritoryGroup" varchar,
-    CONSTRAINT "DimSalesTerritory_pkey" PRIMARY KEY ("SalesTerritoryKey")_
+    CONSTRAINT "DimSalesTerritory_pkey" PRIMARY KEY ("SalesTerritoryKey")
 )
 ```
 4.	FactResellerSales
