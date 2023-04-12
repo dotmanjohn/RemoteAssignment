@@ -16,7 +16,6 @@ There are 4 sheets on the spreadsheet provided for this assignment i.e., 4 table
 1.	DimCustomer
 
 CREATE TABLE public."DimCustomer"
-
 (
     _"Customerkey" bigint NOT NULL,
     "GeographyKey" bigint,
@@ -53,7 +52,6 @@ CREATE TABLE public."DimCustomer"
 2.	DimProduct
 
 CREATE TABLE public."DimProduct"
-
 (
     _"ProductKey" bigint NOT NULL,
     "ProductAlternateKey" varchar,
@@ -86,9 +84,8 @@ CREATE TABLE public."DimProduct"
 3.	DimSalesTerritory
 
 CREATE TABLE public."DimSalesTerritory"
-
 (
-   _ "SalesTerritoryKey" bigint NOT NULL,
+   _"SalesTerritoryKey" bigint NOT NULL,
     "SalesTerritoryAlternateKey" bigint,
     "SalesTerritoryRegion" varchar,
     "SalesTerritoryCountry" varchar,
@@ -99,9 +96,8 @@ CREATE TABLE public."DimSalesTerritory"
 4.	FactResellerSales
 
 CREATE TABLE IF NOT EXISTS public."FactResellerSales"
-
 (
-   _ "ProductKey" bigint NOT NULL,
+   _"ProductKey" bigint NOT NULL,
     "OrderDateKey" bigint,
     "DueDateKey" bigint,
     "ShipDateKey" bigint,
@@ -130,7 +126,8 @@ CREATE TABLE IF NOT EXISTS public."FactResellerSales"
     "ShipDate" timestamp_
 )
 
-<img width="216" alt="01  Tables" src="https://user-images.githubusercontent.com/63157768/231432638-eccd8a1a-6ccd-4f88-bf5d-ed617dc02f70.png">
+<img width="216" figcaption="Created Tables" alt="01  Tables" src="https://user-images.githubusercontent.com/63157768/231432638-eccd8a1a-6ccd-4f88-bf5d-ed617dc02f70.png">
+
 
 **Exploratoty Data Analysis**
 
