@@ -306,7 +306,8 @@ limit 10;_
 Finding: The most ordered product by quantity is “Classic Vest, S” with productkey 471, followed by “Short-Sleeve Classic Jersey, XL” with product key 491 and so on.
 ********************************************************************
 
-•	Top 10 ordered products by SalesAmount (Product Key)
+•	Top 10 ordered products by SalesAmount and ProductKey
+
 (ASSUMING ALL ORDERS WERE MADE IN THE SAME CURRENCY)
 
 _select rs."ProductKey", "ProductName", count(1) num_times_ordered, sum("OrderQuantity") order_qty, sum("SalesAmount") salesamount
@@ -359,7 +360,9 @@ order by 1;_
 Finding: Based on the output of this script, it will be safe to assume key 100 is USD as it is mostly recorded across United States territories and a few times in France, 98 as British Pounds as it only has record in the UK, 36 is Euro recorded in France and Germany and both countries spend Euro, 19 is CAD recorded only in Canada, and 6 is AUD recorded only in Australia.
 ********************************************************************
 
-•	SalesTerritoryCountry by SalesAmount and OrderQuantity
+•	SalesTerritoryCountry by SalesAmount
+
+(ASSUMING ALL ORDERS WERE MADE IN THE SAME CURRENCY)
 
 _select st."SalesTerritoryCountry", count(1) num_times_ordered, sum("OrderQuantity") order_qty, sum("SalesAmount") salesamount
 FROM public."FactResellerSales" rs
