@@ -6,11 +6,11 @@ Readme Github link - https://github.com/dotmanjohn/RemoteAssignment/blob/main/RE
 
 A Postgres database was created on local and connection was made to the database via a pgadmin client.
 
-Host: 172.17.0.2
+Host: 000.00.0.0
 
-Username: postgres
+Username: uuuuuuuu
 
-Password: postgresEnter
+Password: xxxxxxxx
 ****************************************************************************
 **Scope**
 
